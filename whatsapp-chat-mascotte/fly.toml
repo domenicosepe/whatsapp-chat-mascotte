@@ -1,0 +1,30 @@
+# Fly.io: produzione di "Mascot Chat for WhatsApp"
+# Se il nome dell'app Fly è già occupato, cambialo qui e in shopify.app.toml
+# (application_url, redirect_urls) e nella variabile SHOPIFY_APP_URL sotto.
+app = "mascotte-chat-pro"
+primary_region = "ams"
+
+[build]
+
+[env]
+  PORT = "3000"
+  SHOPIFY_APP_URL = "https://mascotte-chat-pro.fly.dev"
+  SCOPES = "write_files"
+
+# Volume per il database SQLite (sessioni dei negozi): sopravvive ai riavvii.
+# Una sola macchina, perché un volume si attacca a una macchina alla volta.
+[[mounts]]
+  source = "data"
+  destination = "/data"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = "off"
+  auto_start_machines = true
+  min_machines_running = 1
+
+[[vm]]
+  memory = "512mb"
+  cpu_kind = "shared"
+  cpus = 1

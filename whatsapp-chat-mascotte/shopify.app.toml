@@ -1,7 +1,7 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "492acf21898a1e2fbb5d7bd5389a15ca"
-application_url = "https://example.com"
+application_url = "https://mascotte-chat-pro.fly.dev"
 embedded = true
 name = "WhatsApp Chat Mascotte"
 
@@ -26,7 +26,7 @@ api_version = "2027-01"
   compliance_topics = [ "customers/data_request", "customers/redact", "shop/redact" ]
 
 [auth]
-redirect_urls = [ "https://example.com/api/auth" ]
+redirect_urls = [ "https://mascotte-chat-pro.fly.dev/auth/callback" ]
 
 [build]
 include_config_on_deploy = true
