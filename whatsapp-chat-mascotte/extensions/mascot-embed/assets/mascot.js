@@ -39,6 +39,23 @@
   var scale = Math.min(150, Math.max(60, Number(cfg.size) || 100)) / 100;
   var height = Math.round((isMobile ? 120 : 170) * scale);
 
+  // Le immagini caricate dal cliente possono essere enormi (es. 2048x2732):
+  // la CDN di Shopify le ridimensiona se chiediamo l'altezza che serve davvero.
+  var isCustom = cfg.mascot === "custom" && !!cfg.customUrl;
+  function sized(src, px) {
+    if (!isCustom) return src;
+    try {
+      var u = new URL(src, window.location.href);
+      if (/(^|\.)cdn\.shopify\.com$/.test(u.hostname)) {
+        u.searchParams.set("height", String(px));
+        return u.toString();
+      }
+    } catch (e) {
+      /* ignore */
+    }
+    return src;
+  }
+
   root.className = "wcm-" + (cfg.position === "left" ? "left" : "right") + (cfg.animate === false ? "" : " wcm-float");
   root.style.setProperty("--wcm-h", height + "px");
   root.style.setProperty("--wcm-bottom", (Number(cfg.offsetBottom) || 16) + "px");
@@ -64,7 +81,7 @@
   var head = el("div", "wcm-head");
   var avatar = el("div", "wcm-avatar");
   var avatarImg = el("img");
-  avatarImg.src = mascotSrc;
+  avatarImg.src = sized(mascotSrc, 160);
   avatarImg.alt = "";
   avatar.appendChild(avatarImg);
   var title = el("div", "wcm-title", cfg.chatTitle || "");
@@ -113,7 +130,7 @@
   btn.setAttribute("aria-label", cfg.chatTitle || "Apri la chat");
   btn.setAttribute("aria-expanded", "false");
   var img = el("img");
-  img.src = mascotSrc;
+  img.src = sized(mascotSrc, height * 2);
   img.alt = "";
   img.decoding = "async";
   btn.appendChild(img);
