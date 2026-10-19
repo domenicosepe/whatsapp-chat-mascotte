@@ -209,15 +209,50 @@
     input.value = "";
     addMsg(cfg.redirectText || "Ti porto su WhatsApp...", false);
     var url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(text);
-    var w = window.open(url, "_blank");
+    if (!openWhatsApp(url)) {
+      // Dentro un iframe (anteprima dell'editor del tema) il popup può essere
+      // bloccato e WhatsApp non si lascia incorniciare: mostriamo un link cliccabile.
+      var m = el("div", "wcm-msg");
+      var a = el("a", null, "WhatsApp ↗");
+      a.href = url;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      m.appendChild(a);
+      body.appendChild(m);
+      body.scrollTop = body.scrollHeight;
+    }
+  }
+
+  function openWhatsApp(url) {
+    var w = null;
+    try {
+      w = window.open(url, "_blank");
+    } catch (e) {
+      w = null;
+    }
     if (w) {
       try {
         w.opener = null;
       } catch (e) {
         /* ignore */
       }
-    } else {
+      return true;
+    }
+    var inFrame = false;
+    try {
+      inFrame = window.top !== window.self;
+    } catch (e) {
+      inFrame = true;
+    }
+    if (!inFrame) {
       window.location.href = url;
+      return true;
+    }
+    try {
+      window.top.location.href = url;
+      return true;
+    } catch (e) {
+      return false;
     }
   }
 
