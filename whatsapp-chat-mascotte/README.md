@@ -8,7 +8,7 @@ App Shopify: una mascotte flottante sul negozio con frasi a rotazione. Al click 
 - **Estensione tema** (`extensions/mascot-embed`): app embed "Mascotte WhatsApp" (`blocks/mascot.liquid`, `assets/mascot.js`, `assets/mascot.css`).
 - **Dati**: la configurazione è un metafield JSON dell'app (`$app:mascot` / `config`), letto dal tema con `app.metafields.mascot.config`.
 - **Immagine personalizzata**: caricata nei File di Shopify (scope `write_files`), l'URL è salvato nella configurazione.
-- **Mascotte incluse**: `public/mascotte/` (pannello admin) e `extensions/mascot-embed/assets/` (negozio). Sono due copie degli stessi file.
+- **Mascotte incluse**: `public/mascotte/` (WebP, per il pannello admin) e `extensions/mascot-embed/assets/` (PNG, per il negozio: le estensioni del tema accettano solo png, jpg, svg, js, css, json e wasm, non WebP).
 
 ## Sviluppo
 

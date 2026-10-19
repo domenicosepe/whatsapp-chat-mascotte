@@ -1,9 +1,9 @@
 {%- assign cfg = app.metafields.mascot.config.value -%}
 {%- if cfg != blank and cfg.enabled != false and cfg.phone != blank -%}
   {{ 'mascot.css' | asset_url | stylesheet_tag }}
-  {%- assign img_uomo = 'mascotte-uomo.webp' | asset_url -%}
-  {%- assign img_donna = 'mascotte-donna.webp' | asset_url -%}
-  {%- assign img_rapper = 'mascotte-rapper.webp' | asset_url -%}
+  {%- assign img_uomo = 'mascotte-uomo.png' | asset_url -%}
+  {%- assign img_donna = 'mascotte-donna.png' | asset_url -%}
+  {%- assign img_rapper = 'mascotte-rapper.png' | asset_url -%}
   <div id="wcm-root" data-uomo="{{ img_uomo }}" data-donna="{{ img_donna }}" data-rapper="{{ img_rapper }}"></div>
   <script type="application/json" id="wcm-config">{{ cfg | json }}</script>
   <script src="{{ 'mascot.js' | asset_url }}" defer="defer"></script>
