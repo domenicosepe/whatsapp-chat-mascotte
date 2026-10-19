@@ -8,7 +8,7 @@
   <script type="application/json" id="wcm-config">{{ cfg | json }}</script>
   <script src="{{ 'mascot.js' | asset_url }}" defer="defer"></script>
 {%- elsif cfg == blank -%}
-  <!-- wcm: no configuration found (save the settings in the app) -->
+  <!-- wcm: no configuration found. namespace={{ app.metafields.mascot | json | truncate: 160 }} raw={{ app.metafields.mascot.config | json | truncate: 160 }} -->
 {%- elsif cfg.enabled == false -%}
   <!-- wcm: mascot disabled in the app settings -->
 {%- else -%}
