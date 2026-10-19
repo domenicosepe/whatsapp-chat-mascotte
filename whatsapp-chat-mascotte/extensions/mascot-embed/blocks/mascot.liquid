@@ -1,4 +1,4 @@
-{%- assign cfg = app.metafields.mascot.config.value -%}
+{%- assign cfg = app.metafields.mascot_config.config.value -%}
 {%- if cfg != blank and cfg.enabled != false and cfg.phone != blank -%}
   {{ 'mascot.css' | asset_url | stylesheet_tag }}
   {%- assign img_uomo = 'mascotte-uomo.png' | asset_url -%}
@@ -8,7 +8,7 @@
   <script type="application/json" id="wcm-config">{{ cfg | json }}</script>
   <script src="{{ 'mascot.js' | asset_url }}" defer="defer"></script>
 {%- elsif cfg == blank -%}
-  <!-- wcm: no configuration found. namespace={{ app.metafields.mascot | json | truncate: 160 }} raw={{ app.metafields.mascot.config | json | truncate: 160 }} -->
+  <!-- wcm: no configuration found. new={{ app.metafields.mascot_config.config | json | truncate: 160 }} old={{ app.metafields.mascot.config | json | truncate: 160 }} -->
 {%- elsif cfg.enabled == false -%}
   <!-- wcm: mascot disabled in the app settings -->
 {%- else -%}

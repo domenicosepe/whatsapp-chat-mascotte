@@ -10,7 +10,7 @@ import {
   withDefaults,
 } from "../mascot-config";
 
-const NAMESPACE = "$app:mascot";
+const NAMESPACE = "mascot_config";
 const KEY = "config";
 const MAX_UPLOAD = 3 * 1024 * 1024;
 const ALLOWED_TYPES = ["image/png", "image/webp", "image/gif", "image/jpeg"];
@@ -23,7 +23,7 @@ export const loader = async ({ request }) => {
       query MascotConfig {
         currentAppInstallation {
           id
-          metafield(namespace: "$app:mascot", key: "config") {
+          metafield(namespace: "mascot_config", key: "config") {
             value
           }
         }

@@ -1,5 +1,5 @@
 // Configurazione condivisa tra pannello admin (client) e salvataggio (server).
-// Viene salvata come metafield JSON dell'app ($app:mascot / config) e letta
+// Viene salvata come metafield JSON dell'app (mascot_config / config) e letta
 // dal blocco app embed del tema (extensions/mascot-embed).
 
 export const MASCOTS = [
